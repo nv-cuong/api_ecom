@@ -22,4 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::get('admin', [AdminController::class, 'index']);
 // Route::post('admin/auth', [AdminController::class, 'auth'])->name('admin.auth');
 
-Route::get('admin/dashboard', [AdminController::class, 'dashboard']);
+// Route::get('admin/dashboard', [AdminController::class, 'dashboard']);

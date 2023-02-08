@@ -16,6 +16,12 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next)
     {
+        if($request->session()->has('ADMIN_LOGIN')){
+            
+        }else{
+            session()->flash('error', 'Please enter valid login details');
+            return redirect('admin');
+        }
         return $next($request);
     }
 }

@@ -26,4 +26,7 @@ Route::group(['middleware' => 'admin_auth'], function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('admin/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('admin/manage-category', [CategoryController::class, 'manage_category'])->name('category.manage_category');
+    Route::get('admin/logout', function () {
+        return view('welcome');
+    });
 });

@@ -2,7 +2,7 @@
 
 @section('container')
     <h1 class="mb10">Manage Category</h1>
-    <a href="category"><button type="button" class="btn btn-success"></button> Back </a>
+    <a href="category"><button type="button" class="btn btn-secondary">Back</button></a>
     <div class="row m-t-30">
         <div class="col-md-12">
             <div class="row">

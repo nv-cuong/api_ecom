@@ -1,8 +1,8 @@
 @extends('admin.layout')
 
 @section('container')
-    <h1>Category</h1>
-    <a href=""><button type="button" class="btn btn-success"></button> Add Category</a>
+    <h1 class="mb10">Category</h1>
+    <a href="{{ route('category.manage_category') }}"><button type="button" class="btn btn-success">Add Category</button></a>
     <div class="row m-t-30">
         <div class="col-md-12">
             <!-- DATA TABLE-->

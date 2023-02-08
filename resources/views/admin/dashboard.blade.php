@@ -2,6 +2,6 @@
 
 @section('container')
     <div class="row">
-        <h3>Dashboard</h3>
+        <h1 class="mb10">Dashboard</h1>
     </div>
 @endsection

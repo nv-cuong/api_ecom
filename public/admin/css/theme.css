@@ -14653,3 +14653,8 @@ section {
 .mb10 {
     margin-bottom: 10px;
 }
+
+.card-header {
+    background-color: #45b649;
+    color: black;
+}

@@ -24,9 +24,17 @@ Route::post('admin/auth', [AdminController::class, 'auth'])->name('admin.auth');
 
 Route::group(['middleware' => 'admin_auth'], function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    
     Route::get('admin/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('admin/manage-category', [CategoryController::class, 'manage_category'])->name('category.manage_category');
+    Route::post('admin/store', [CategoryController::class, 'store'])->name('category.store');
+    
+    
+    
     Route::get('admin/logout', function () {
-        return view('welcome');
+        session()->forget('ADMIN_LOGIN');
+        session()->forget('ADMIN_ID');
+        session()->flash('error', 'Logout successfully!');
+        return view('admin/login');
     });
 });

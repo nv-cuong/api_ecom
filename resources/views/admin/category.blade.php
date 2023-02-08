@@ -1,6 +1,7 @@
 @extends('admin.layout')
 
 @section('container')
+    {{ session('success') }}
     <h1 class="mb10">Category</h1>
     <a href="{{ route('category.manage_category') }}"><button type="button" class="btn btn-success">Add Category</button></a>
     <div class="row m-t-30">
@@ -10,11 +11,10 @@
                 <table class="table table-borderless table-data3">
                     <thead>
                         <tr>
-                            <th>date</th>
-                            <th>type</th>
-                            <th>description</th>
-                            <th>status</th>
-                            <th>price</th>
+                            <th>ID</th>
+                            <th>Category Name</th>
+                            <th>Category Slug</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>

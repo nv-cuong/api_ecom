@@ -23,14 +23,25 @@ Route::get('admin/login', [AdminController::class, 'index']);
 Route::post('admin/auth', [AdminController::class, 'auth'])->name('admin.auth');
 
 Route::group(['middleware' => 'admin_auth'], function () {
-    Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    
-    Route::get('admin/category', [CategoryController::class, 'index'])->name('category.index');
-    Route::get('admin/manage-category', [CategoryController::class, 'manage_category'])->name('category.manage_category');
-    Route::post('admin/store', [CategoryController::class, 'store'])->name('category.store');
-    
-    
-    
+    Route::get('admin/dashboard', [AdminController::class, 'dashboard'])
+        ->name('admin.dashboard');
+
+    Route::prefix('admin/category')->name('category.')->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])
+            ->name('index');
+        Route::get('/create', [CategoryController::class, 'create'])
+            ->name('create');
+        Route::post('/store', [CategoryController::class, 'store'])
+            ->name('store');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])
+            ->name('edit');
+        Route::put('/update/{id}', [CategoryController::class, 'update'])
+            ->name('update');
+        Route::delete('/delete/{id}', [CategoryController::class, 'delete'])
+            ->name('delete');
+    });
+
+
     Route::get('admin/logout', function () {
         session()->forget('ADMIN_LOGIN');
         session()->forget('ADMIN_ID');

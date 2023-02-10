@@ -50,6 +50,10 @@
                             <a href="{{ route('category.index') }}">
                                 <i class="fas fa-tachometer-alt"></i>Category</a>
                         </li>
+                        <li class="has-sub">
+                            <a href="{{ route('coupon.index') }}">
+                                <i class="fas fa-tachometer-alt"></i>Coupon</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -73,6 +77,10 @@
                         <li class="has-sub">
                             <a href="{{ route('category.index') }}">
                                 <i class="fas fa-tachometer-alt"></i>Category</a>
+                        </li>
+                        <li class="has-sub">
+                            <a href="{{ route('coupon.index') }}">
+                                <i class="fas fa-tachometer-alt"></i>Coupon</a>
                         </li>
                     </ul>
                 </nav>
@@ -126,7 +134,7 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="logout">
+                                                <a href="{{ route('admin.logut') }}">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>

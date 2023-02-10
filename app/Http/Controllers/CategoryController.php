@@ -38,6 +38,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'category_name' => 'required|unique:categories,category_name',
+            'category_slug' => 'required',
         ]);
 
         $category = new Category();
@@ -82,6 +83,18 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $category = Category::find($id);
+        if($category){
+            $request->validate([
+                'category_name' => 'required|unique:categories,category_name,'.$category->id,
+                'category_slug' => 'required',
+            ]);
+
+            $category->category_name = $request->category_name;
+            $category->category_slug = $request->category_slug;
+            $category->save(); 
+        }
+        session()->flash('success', 'Update category successfully!');
+        return redirect()->route('category.index');
     }
 
     /**

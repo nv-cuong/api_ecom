@@ -20,7 +20,7 @@
                                 <div class="form-group">
                                     <label for="category_name" class="control-label mb-1">Category name</label>
                                     <input id="category_name" name="category_name" type="text" class="form-control"
-                                        aria-required="true" aria-invalid="false" required>
+                                        aria-required="true" aria-invalid="false" value="{{ old('category_name') }}">
                                     @error('category_name')
                                         <div class="alert alert-danger">
                                             {{ $message }}
@@ -30,7 +30,7 @@
                                 <div class="form-group">
                                     <label for="category_slug" class="control-label mb-1">Category slug</label>
                                     <input id="category_slug" name="category_slug" type="text" class="form-control"
-                                        aria-required="true" aria-invalid="false" required>
+                                        aria-required="true" aria-invalid="false" value="{{ old('category_slug') }}">
                                         @error('category_slug')
                                         <div class="alert alert-danger">
                                             {{ $message }}

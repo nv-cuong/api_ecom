@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CouponController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,11 +42,26 @@ Route::group(['middleware' => 'admin_auth'], function () {
             ->name('delete');
     });
 
+    Route::prefix('admin/coupon')->name('coupon.')->group(function () {
+        Route::get('/', [CouponController::class, 'index'])
+            ->name('index');
+        Route::get('/create', [CouponController::class, 'create'])
+            ->name('create');
+        Route::post('/store', [CouponController::class, 'store'])
+            ->name('store');
+        Route::get('/edit/{id}', [CouponController::class, 'edit'])
+            ->name('edit');
+        Route::put('/update/{id}', [CouponController::class, 'update'])
+            ->name('update');
+        Route::delete('/delete/{id}', [CouponController::class, 'delete'])
+            ->name('delete');
+    });
+
 
     Route::get('admin/logout', function () {
         session()->forget('ADMIN_LOGIN');
         session()->forget('ADMIN_ID');
         session()->flash('error', 'Logout successfully!');
         return view('admin/login');
-    });
+    })->name('admin.logut');
 });

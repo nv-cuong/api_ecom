@@ -1,5 +1,6 @@
 @extends('admin.layout')
-
+@section('page_title', 'Coupon')
+@section('coupon_select')
 @section('container')
     {{ session('success') }}
     <h1 class="mb10">Category</h1>

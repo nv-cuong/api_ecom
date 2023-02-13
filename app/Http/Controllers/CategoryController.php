@@ -44,6 +44,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->category_name = $request->post('category_name');
         $category->category_slug = $request->post('category_slug');
+        $category->status = 1;
         $category->save();
 
         session()->flash('success', 'Create category successfully!');
@@ -108,6 +109,21 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->delete();
         session()->flash('success', 'Delete category successfully!');
+        return redirect()->route('category.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id, $status
+     * @return \Illuminate\Http\Response
+     */
+    public function status($status, $id)
+    {
+        $category = Category::find($id);
+        $category->status = $status;
+        $category->save();
+        session()->flash('success', 'Category update status successfully!');
         return redirect()->route('category.index');
     }
 }

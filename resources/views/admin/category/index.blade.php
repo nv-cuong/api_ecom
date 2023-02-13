@@ -16,21 +16,33 @@
                             <th>ID</th>
                             <th>Category Name</th>
                             <th>Category Slug</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ( $categories as $category )
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $category->id }}</td>
-                            <td>{{ $category->category_name }}</td>
-                            <td>{{ $category->category_slug }}</td>
-                            <td>
-                                <a href="{{ route('category.edit', $category->id) }}"><button type="button" class="btn btn-primary">Edit</button></a>
-                                <a href="{{ route('category.delete', $category->id) }}"><button type="button" class="btn btn-danger">Delete</button></a>
-                            </td>
-                        </tr>
+                        @foreach ($categories as $category)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $category->id }}</td>
+                                <td>{{ $category->category_name }}</td>
+                                <td>{{ $category->category_slug }}</td>
+                                <td>
+                                    @if ($category->status == 1)
+                                        <a href="{{ route('category.status', [0, $category->id]) }}"><button
+                                                type="button" class="btn btn-success">Active</button></a>
+                                    @else
+                                        <a href="{{ route('category.status', [1, $category->id]) }}"><button
+                                                type="button" class="btn btn-danger">Deactive</button></a>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('category.edit', $category->id) }}"><button type="button"
+                                            class="btn btn-primary">Edit</button></a>
+                                    <a href="{{ route('category.delete', $category->id) }}"><button type="button"
+                                            class="btn btn-danger">Delete</button></a>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

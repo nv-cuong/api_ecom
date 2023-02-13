@@ -40,6 +40,8 @@ Route::group(['middleware' => 'admin_auth'], function () {
             ->name('update');
         Route::delete('/delete/{id}', [CategoryController::class, 'delete'])
             ->name('delete');
+        Route::get('/status/{status}/{id}', [CategoryController::class, 'status'])
+            ->name('status');
     });
 
     Route::prefix('admin/coupon')->name('coupon.')->group(function () {
@@ -55,6 +57,8 @@ Route::group(['middleware' => 'admin_auth'], function () {
             ->name('update');
         Route::delete('/delete/{id}', [CouponController::class, 'delete'])
             ->name('delete');
+        Route::get('/status/{status}/{id}', [CouponController::class, 'status'])
+            ->name('status');
     });
 
 

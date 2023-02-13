@@ -17,6 +17,7 @@
                             <th>Title</th>
                             <th>Code</th>
                             <th>Value</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -28,6 +29,15 @@
                             <td>{{ $coupon->title }}</td>
                             <td>{{ $coupon->code }}</td>
                             <td>{{ $coupon->value }}</td>
+                            <td>
+                                @if ($coupon->status == 1)
+                                    <a href="{{ route('coupon.status', [0, $coupon->id]) }}"><button
+                                            type="button" class="btn btn-success">Active</button></a>
+                                @else
+                                    <a href="{{ route('coupon.status', [1, $coupon->id]) }}"><button
+                                            type="button" class="btn btn-danger">Deactive</button></a>
+                                @endif
+                            </td>
                             <td>
                                 <a href="{{ route('coupon.edit', $coupon->id) }}"><button type="button" class="btn btn-primary">Edit</button></a>
                                 <a href="{{ route('coupon.delete', $coupon->id) }}"><button type="button" class="btn btn-danger">Delete</button></a>

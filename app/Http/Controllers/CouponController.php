@@ -114,4 +114,19 @@ class CouponController extends Controller
         session()->flash('success', 'Delete coupon successfully!');
         return redirect()->route('coupon.index');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id, $status
+     * @return \Illuminate\Http\Response
+     */
+    public function status($status, $id)
+    {
+        $coupon = Coupon::find($id);
+        $coupon->status = $status;
+        $coupon->save();
+        session()->flash('success', 'Coupon update status successfully!');
+        return redirect()->route('coupon.index');
+    }
 }

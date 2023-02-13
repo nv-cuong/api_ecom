@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Coupon;
+use App\Models\Color;
 use Illuminate\Http\Request;
 
-class CouponController extends Controller
+class ColorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $coupons = Coupon::all();
-        return view('admin.coupon.index', compact('coupons'));
+        $colors = Color::all();
+        return view('admin.color.index', compact('colors'));
     }
 
     /**
@@ -25,7 +25,7 @@ class CouponController extends Controller
      */
     public function create()
     {
-        return view('admin.coupon.create');
+        return view('admin.color.create');
     }
 
     /**
@@ -37,20 +37,16 @@ class CouponController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'code' => 'required|unique:coupons,code',
-            'value' => 'required',
+            'color' => 'required',
         ]);
 
-        $coupon = new Coupon();
-        $coupon->title = $request->post('title');
-        $coupon->code = $request->post('code');
-        $coupon->value = $request->post('value');
-        $coupon->status = 1;
-        $coupon->save();
+        $color = new Color();
+        $color->color = $request->post('color');
+        $color->status = 1;
+        $color->save();
 
-        session()->flash('success', 'Create coupon successfully!');
-        return redirect()->route('category.index');
+        session()->flash('success', 'Create color successfully!');
+        return redirect()->route('color.index');
     }
 
     /**
@@ -72,8 +68,8 @@ class CouponController extends Controller
      */
     public function edit($id)
     {
-        $coupon = Coupon::find($id);
-        return view('admin.coupon.edit', compact('coupon'));
+        $color = Color::find($id);
+        return view('admin.color.edit', compact('color'));
     }
 
     /**
@@ -85,21 +81,17 @@ class CouponController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $coupon = Coupon::find($id);
-        if ($coupon) {
+        $color = Color::find($id);
+        if ($color) {
             $request->validate([
-                'title' => 'required',
-                'code' => 'required|unique:coupons,code' . $coupon->id,
-                'value' => 'required',
+                'color' => 'required',
             ]);
 
-            $coupon->title = $request->title;
-            $coupon->code = $request->code;
-            $coupon->value = $request->value;
-            $coupon->save();
+            $color->color = $request->color;
+            $color->save();
         }
-        session()->flash('success', 'Update coupon successfully!');
-        return redirect()->route('coupon.index');
+        session()->flash('success', 'Update color successfully!');
+        return redirect()->route('color.index');
     }
 
     /**
@@ -110,10 +102,10 @@ class CouponController extends Controller
      */
     public function delete($id)
     {
-        $coupon = Coupon::find($id);
-        $coupon->delete();
-        session()->flash('success', 'Delete coupon successfully!');
-        return redirect()->route('coupon.index');
+        $color = Color::find($id);
+        $color->delete();
+        session()->flash('success', 'Delete color successfully!');
+        return redirect()->route('color.index');
     }
 
     /**
@@ -124,10 +116,10 @@ class CouponController extends Controller
      */
     public function status($status, $id)
     {
-        $coupon = Coupon::find($id);
-        $coupon->status = $status;
-        $coupon->save();
-        session()->flash('success', 'Coupon update status successfully!');
-        return redirect()->route('coupon.index');
+        $color = Color::find($id);
+        $color->status = $status;
+        $color->save();
+        session()->flash('success', 'Color update status successfully!');
+        return redirect()->route('color.index');
     }
 }

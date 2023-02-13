@@ -54,6 +54,10 @@
                             <a href="{{ route('coupon.index') }}">
                                 <i class="fas fa-tag"></i>Coupon</a>
                         </li>
+                        <li class="@yield('size_select')">
+                            <a href="{{ route('size.index') }}">
+                                <i class="fas fa-window-maximize"></i>Size</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -81,6 +85,10 @@
                         <li class="@yield('coupon_select')">
                             <a href="{{ route('coupon.index') }}">
                                 <i class="fas fa-tag"></i>Coupon</a>
+                        </li>
+                        <li class="@yield('size_select')">
+                            <a href="{{ route('size.index') }}">
+                                <i class="fas fa-window-maximize"></i>Size</a>
                         </li>
                     </ul>
                 </nav>

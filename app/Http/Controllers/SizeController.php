@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Coupon;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
-class CouponController extends Controller
+class SizeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $coupons = Coupon::all();
-        return view('admin.coupon.index', compact('coupons'));
+        $sizes = Size::all();
+        return view('admin.size.index', compact('sizes'));
     }
 
     /**
@@ -25,7 +25,7 @@ class CouponController extends Controller
      */
     public function create()
     {
-        return view('admin.coupon.create');
+        return view('admin.size.create');
     }
 
     /**
@@ -37,20 +37,16 @@ class CouponController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'code' => 'required|unique:coupons,code',
-            'value' => 'required',
+            'size' => 'required',
         ]);
 
-        $coupon = new Coupon();
-        $coupon->title = $request->post('title');
-        $coupon->code = $request->post('code');
-        $coupon->value = $request->post('value');
-        $coupon->status = 1;
-        $coupon->save();
+        $size = new Size();
+        $size->size = $request->post('size');
+        $size->status = 1;
+        $size->save();
 
-        session()->flash('success', 'Create coupon successfully!');
-        return redirect()->route('category.index');
+        session()->flash('success', 'Create size successfully!');
+        return redirect()->route('size.index');
     }
 
     /**
@@ -72,8 +68,8 @@ class CouponController extends Controller
      */
     public function edit($id)
     {
-        $coupon = Coupon::find($id);
-        return view('admin.coupon.edit', compact('coupon'));
+        $size = Size::find($id);
+        return view('admin.size.edit', compact('size'));
     }
 
     /**
@@ -85,21 +81,17 @@ class CouponController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $coupon = Coupon::find($id);
-        if ($coupon) {
+        $size = Size::find($id);
+        if ($size) {
             $request->validate([
-                'title' => 'required',
-                'code' => 'required|unique:coupons,code' . $coupon->id,
-                'value' => 'required',
+                'size' => 'required',
             ]);
 
-            $coupon->title = $request->title;
-            $coupon->code = $request->code;
-            $coupon->value = $request->value;
-            $coupon->save();
+            $size->size = $request->size;
+            $size->save();
         }
-        session()->flash('success', 'Update coupon successfully!');
-        return redirect()->route('coupon.index');
+        session()->flash('success', 'Update size successfully!');
+        return redirect()->route('size.index');
     }
 
     /**
@@ -110,10 +102,10 @@ class CouponController extends Controller
      */
     public function delete($id)
     {
-        $coupon = Coupon::find($id);
-        $coupon->delete();
-        session()->flash('success', 'Delete coupon successfully!');
-        return redirect()->route('coupon.index');
+        $size = Size::find($id);
+        $size->delete();
+        session()->flash('success', 'Delete size successfully!');
+        return redirect()->route('size.index');
     }
 
     /**
@@ -124,10 +116,10 @@ class CouponController extends Controller
      */
     public function status($status, $id)
     {
-        $coupon = Coupon::find($id);
-        $coupon->status = $status;
-        $coupon->save();
-        session()->flash('success', 'Coupon update status successfully!');
-        return redirect()->route('coupon.index');
+        $size = Size::find($id);
+        $size->status = $status;
+        $size->save();
+        session()->flash('success', 'Size update status successfully!');
+        return redirect()->route('size.index');
     }
 }

@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +60,40 @@ Route::group(['middleware' => 'admin_auth'], function () {
         Route::delete('/delete/{id}', [CouponController::class, 'delete'])
             ->name('delete');
         Route::get('/status/{status}/{id}', [CouponController::class, 'status'])
+            ->name('status');
+    });
+
+    Route::prefix('admin/size')->name('size.')->group(function () {
+        Route::get('/', [SizeController::class, 'index'])
+            ->name('index');
+        Route::get('/create', [SizeController::class, 'create'])
+            ->name('create');
+        Route::post('/store', [SizeController::class, 'store'])
+            ->name('store');
+        Route::get('/edit/{id}', [SizeController::class, 'edit'])
+            ->name('edit');
+        Route::put('/update/{id}', [SizeController::class, 'update'])
+            ->name('update');
+        Route::delete('/delete/{id}', [SizeController::class, 'delete'])
+            ->name('delete');
+        Route::get('/status/{status}/{id}', [SizeController::class, 'status'])
+            ->name('status');
+    });
+
+    Route::prefix('admin/color')->name('color.')->group(function () {
+        Route::get('/', [ColorController::class, 'index'])
+            ->name('index');
+        Route::get('/create', [ColorController::class, 'create'])
+            ->name('create');
+        Route::post('/store', [ColorController::class, 'store'])
+            ->name('store');
+        Route::get('/edit/{id}', [ColorController::class, 'edit'])
+            ->name('edit');
+        Route::put('/update/{id}', [ColorController::class, 'update'])
+            ->name('update');
+        Route::delete('/delete/{id}', [ColorController::class, 'delete'])
+            ->name('delete');
+        Route::get('/status/{status}/{id}', [ColorController::class, 'status'])
             ->name('status');
     });
 

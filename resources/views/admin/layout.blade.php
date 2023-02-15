@@ -90,6 +90,14 @@
                             <a href="{{ route('size.index') }}">
                                 <i class="fas fa-window-maximize"></i>Size</a>
                         </li>
+                        <li class="@yield('color_select')">
+                            <a href="{{ route('color.index') }}">
+                                <i class="fas fa-paint-brush"></i>Color</a>
+                        </li>
+                        <li class="@yield('product_select')">
+                            <a href="{{ route('product.index') }}">
+                                <i class="fas fa-tasks"></i>Product</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

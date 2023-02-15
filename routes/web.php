@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
 
@@ -97,6 +98,22 @@ Route::group(['middleware' => 'admin_auth'], function () {
             ->name('status');
     });
 
+    Route::prefix('admin/product')->name('product.')->group(function () {
+        Route::get('/', [ProductController::class, 'index'])
+            ->name('index');
+        Route::get('/create', [ProductController::class, 'create'])
+            ->name('create');
+        Route::post('/store', [ProductController::class, 'store'])
+            ->name('store');
+        Route::get('/edit/{id}', [ProductController::class, 'edit'])
+            ->name('edit');
+        Route::put('/update/{id}', [ProductController::class, 'update'])
+            ->name('update');
+        Route::delete('/delete/{id}', [ProductController::class, 'delete'])
+            ->name('delete');
+        Route::get('/status/{status}/{id}', [ProductController::class, 'status'])
+            ->name('status');
+    });
 
     Route::get('admin/logout', function () {
         session()->forget('ADMIN_LOGIN');

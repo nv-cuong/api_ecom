@@ -2,7 +2,14 @@
 @section('page_title', 'color')
 @section('color_select')
 @section('container')
-    {{ session('success') }}
+    @if (session()->has('success'))
+        <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    @endif
     <h1 class="mb10">color</h1>
     <a href="{{ route('color.create') }}"><button type="button" class="btn btn-success">Add color</button></a>
     <div class="row m-t-30">

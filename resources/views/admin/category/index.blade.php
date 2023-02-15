@@ -2,7 +2,14 @@
 @section('page_title', 'Category')
 @section('category_select')
 @section('container')
-    {{ session('success') }}
+    @if (session()->has('success'))
+        <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    @endif
     <h1 class="mb10">Category</h1>
     <a href="{{ route('category.create') }}"><button type="button" class="btn btn-success">Add Category</button></a>
     <div class="row m-t-30">
@@ -29,11 +36,11 @@
                                 <td>{{ $category->category_slug }}</td>
                                 <td>
                                     @if ($category->status == 1)
-                                        <a href="{{ route('category.status', [0, $category->id]) }}"><button
-                                                type="button" class="btn btn-success">Active</button></a>
+                                        <a href="{{ route('category.status', [0, $category->id]) }}"><button type="button"
+                                                class="btn btn-success">Active</button></a>
                                     @else
-                                        <a href="{{ route('category.status', [1, $category->id]) }}"><button
-                                                type="button" class="btn btn-danger">Deactive</button></a>
+                                        <a href="{{ route('category.status', [1, $category->id]) }}"><button type="button"
+                                                class="btn btn-danger">Deactive</button></a>
                                     @endif
                                 </td>
                                 <td>

@@ -1,6 +1,6 @@
 @extends('admin.layout')
-@section('page_title', 'size')
-@section('size_select')
+@section('page_title', 'Product')
+@section('product_select')
 @section('container')
     @if (session()->has('success'))
         <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
@@ -10,8 +10,8 @@
             </button>
         </div>
     @endif
-    <h1 class="mb10">size</h1>
-    <a href="{{ route('size.create') }}"><button type="button" class="btn btn-success">Add size</button></a>
+    <h1 class="mb10">Product</h1>
+    <a href="{{ route('product.create') }}"><button type="button" class="btn btn-success">Add Category</button></a>
     <div class="row m-t-30">
         <div class="col-md-12">
             <!-- DATA TABLE-->
@@ -21,30 +21,32 @@
                         <tr>
                             <th>No.</th>
                             <th>ID</th>
-                            <th>Size</th>
+                            <th>Name</th>
+                            <th>Description</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($sizes as $key => $size)
+                        @foreach ($products as $product)
                             <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $size->id }}</td>
-                                <td>{{ $size->size }}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $product->id }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->description }}</td>
                                 <td>
-                                    @if ($size->status == 1)
-                                        <a href="{{ route('size.status', [0, $size->id]) }}"><button type="button"
+                                    @if ($product->status == 1)
+                                        <a href="{{ route('product.status', [0, $product->id]) }}"><button type="button"
                                                 class="btn btn-success">Active</button></a>
                                     @else
-                                        <a href="{{ route('size.status', [1, $size->id]) }}"><button type="button"
+                                        <a href="{{ route('product.status', [1, $product->id]) }}"><button type="button"
                                                 class="btn btn-danger">Deactive</button></a>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('size.edit', $size->id) }}"><button type="button"
+                                    <a href="{{ route('product.edit', $product->id) }}"><button type="button"
                                             class="btn btn-primary">Edit</button></a>
-                                    <a href="{{ route('size.delete', $size->id) }}"><button type="button"
+                                    <a href="{{ route('product.delete', $product->id) }}"><button type="button"
                                             class="btn btn-danger">Delete</button></a>
                                 </td>
                             </tr>

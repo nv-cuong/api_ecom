@@ -49,12 +49,9 @@
                                         <a href="#">Forgotten Password?</a>
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign
-                                    in</button>
-                                <div class="alert alert-danger" role="alert">
-                                    @if (session()->has('error'))
-                                        <div
-                                            class="sufee-alert alert with-close alert-error alert-dismissible fade show">
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+                                    @if (session()->has('error'))F
+                                        <div class="sufee-alert alert alert-danger with-close alert-error alert-dismissible fade show">
                                             {{ session('error') }}
                                             <button type="button" class="close" data-dismiss="alert"
                                                 aria-label="Close">
@@ -62,7 +59,6 @@
                                             </button>
                                         </div>
                                     @endif
-                                </div>
                             </form>
                             <div class="register-link">
                                 <p>

@@ -11,7 +11,7 @@
         </div>
     @endif
     <h1 class="mb10">Product</h1>
-    <a href="{{ route('product.create') }}"><button type="button" class="btn btn-success">Add Category</button></a>
+    <a href="{{ route('product.create') }}"><button type="button" class="btn btn-success">Add Product</button></a>
     <div class="row m-t-30">
         <div class="col-md-12">
             <!-- DATA TABLE-->

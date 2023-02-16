@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -26,7 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        $categories = Category::where('status', 1)->get();
+        return view('admin.product.create', compact('categories'));
     }
 
     /**
@@ -54,6 +56,12 @@ class ProductController extends Controller
         $product->uses = $request->post('uses');
         $product->warranty = $request->post('warranty');
         $product->status = 1;
+
+        $image = $request->file('image');
+        if(isset($image)){
+            
+        }
+
         $product->save();
 
         session()->flash('success', 'Create product successfully!');
@@ -79,7 +87,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = Category::where('status', 1)->get();
+        $product = Product::find($id);
+        return view('admin.product.edit', compact(['product', 'categories']));
     }
 
     /**
@@ -91,7 +101,29 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $product = Product::find($id);
+        if ($product) {
+            $request->validate([
+                'name' => 'required',
+            ]);
+
+            $product->name = $request->name;
+            $product->category_id = $request->category_id;
+            $product->slug = Str::slug($request->name);
+            $product->brand = $request->brand;
+            $product->model = $request->model;
+            $product->short_desc = $request->short_desc;
+            $product->description = $request->description;
+            $product->keywords = $request->keywords;
+            $product->technical_specification = $request->technical_specification;
+            $product->uses = $request->uses;
+            $product->warranty = $request->warranty;
+            $product->status = 1;
+            $product->save();
+        }
+        session()->flash('success', 'Create product successfully!');
+        return redirect()->route('product.index');
     }
 
     /**

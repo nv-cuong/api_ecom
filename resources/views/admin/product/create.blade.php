@@ -7,7 +7,6 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-lg-12">
-                    {{ session('success') }}
                     <div class="card">
                         <div class="card-header">Manage Product</div>
                         <div class="card-body">
@@ -94,8 +93,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="keywords" class="control-label mb-1">Keywords</label>
-                                    <textarea id="keywords" name="keywords" type="text" class="form-control" aria-required="true"
-                                        aria-invalid="false">{{ old('keywords') }}</textarea>
+                                    <textarea id="keywords" name="keywords" type="text" class="form-control" aria-required="true" aria-invalid="false">{{ old('keywords') }}</textarea>
                                     @error('keywords')
                                         <div class="alert alert-danger">
                                             {{ $message }}

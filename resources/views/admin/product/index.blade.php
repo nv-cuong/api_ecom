@@ -20,8 +20,8 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>ID</th>
                             <th>Name</th>
+                            <th>Image</th>
                             <th>Description</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -31,8 +31,10 @@
                         @foreach ($products as $product)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
+                                <td>
+                                    <img src="{{ asset('storage/product/'.$product->image) }}" alt="">
+                                </td>
                                 <td>{{ $product->description }}</td>
                                 <td>
                                     @if ($product->status == 1)

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -43,10 +46,24 @@ class ProductController extends Controller
             'name' => 'required',
         ]);
 
+        $image = $request->file('image');
+        $slug = Str::slug($request->name);
+        if (isset($image)) {
+            $currentDate = Carbon::now()->toDateString();
+            $imageName = $slug . '_' . $currentDate . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+            if (!Storage::disk('public')->exists('product')) {
+                Storage::disk('public')->makeDirectory('product');
+            }
+            $product_image = Image::make($image)->stream();
+            Storage::disk('public')->put('product/' . $imageName, $product_image);
+        }
+
         $product = new Product();
         $product->name = $request->post('name');
         $product->category_id = $request->post('category_id');
-        $product->slug = Str::slug($request->post('name'));
+        $product->slug = $slug;
+        $product->image = $imageName;
         $product->brand = $request->post('brand');
         $product->model = $request->post('model');
         $product->short_desc = $request->post('short_desc');
@@ -56,11 +73,6 @@ class ProductController extends Controller
         $product->uses = $request->post('uses');
         $product->warranty = $request->post('warranty');
         $product->status = 1;
-
-        $image = $request->file('image');
-        if(isset($image)){
-            
-        }
 
         $product->save();
 
@@ -108,9 +120,26 @@ class ProductController extends Controller
                 'name' => 'required',
             ]);
 
+            $image = $request->file('image');
+            $slug = Str::slug($request->name);
+            if (isset($image)) {
+                $currentDate = Carbon::now()->toDateString();
+                $imageName = $slug . '_' . $currentDate . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+                if (!Storage::disk('public')->exists('product')) {
+                    Storage::disk('public')->makeDirectory('product');
+                }
+                if (Storage::disk('public')->exists('product/' . $product->image)) {
+                    Storage::disk('public')->delete('product/' . $product->image);
+                }
+                $product_image = Image::make($image)->stream();
+                Storage::disk('public')->put('product/' . $imageName, $product_image);
+            }
+
             $product->name = $request->name;
             $product->category_id = $request->category_id;
-            $product->slug = Str::slug($request->name);
+            $product->slug = $slug;
+            $product->image = $imageName;
             $product->brand = $request->brand;
             $product->model = $request->model;
             $product->short_desc = $request->short_desc;
@@ -135,6 +164,9 @@ class ProductController extends Controller
     public function delete($id)
     {
         $product = Product::find($id);
+        if (Storage::disk('public')->exists('product/' . $product->image)) {
+            Storage::disk('public')->delete('product/' . $product->image);
+        }
         $product->delete();
         session()->flash('success', 'Delete product successfully!');
         return redirect()->route('category.index');
